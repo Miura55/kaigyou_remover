@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <title>改行りむーばー</title>
+  </head>
+  <body>
+    <form class="" action="index.html" method="post">
+      <p>改行消したい文字列を入力</p>
+      <textarea id="before" cols="50" rows="10"></textarea>
+      <br>
+      <button type="submit" class="btn btn-default">↓変換</button>
+    </form>
+    <!-- <div id="output"></div> -->
+    <textarea id="output" rows="10" cols="50"></textarea>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+     $('form').on('submit', function(event) {
+       $.ajax({
+         data : {
+           before : $('#before').val(),
+         },
+         type : 'POST',
+         url : '/process'
+       })
+       .done(function(data) {
+         $('#output').text(data.output).show();
+       });
+       event.preventDefault();
+     });
+   });
+  </script>
+</html>
